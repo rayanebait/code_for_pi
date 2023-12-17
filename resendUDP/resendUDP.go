@@ -41,7 +41,7 @@ func main() {
 	// }
 
 	for {
-		c.SetDeadline(time.Now().Add(time.Duration(500000000)))
+		c.SetDeadline(time.Now().Add(time.Duration(4000000000)))
 		buf := make([]byte, 2048)
 
 		_, addr, err := c.ReadFrom(buf)
