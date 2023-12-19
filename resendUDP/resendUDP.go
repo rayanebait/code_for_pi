@@ -25,6 +25,10 @@ import (
 // }
 
 func main() {
+	c2, err := net.ListenPacket("udp", ":37086")
+	if err != nil {
+		log.Fatal("ListenPacket", err)
+	}
 	c, err := net.ListenPacket("udp", ":9157")
 	if err != nil {
 		log.Fatal("ListenPacket", err)
@@ -41,9 +45,17 @@ func main() {
 
 	for {
 		c.SetDeadline(time.Now().Add(time.Duration(4000000000)))
+		c2.SetDeadline(time.Now().Add(time.Duration(4000000000)))
+
 		buf := make([]byte, 2048)
+		buf2 := make([]byte, 2048)
 
 		size, addr, err := c.ReadFrom(buf)
+		if errors.Is(err, os.ErrDeadlineExceeded) {
+			fmt.Println(err)
+			continue
+		}
+		size2, addr2, err := c2.ReadFrom(buf2)
 
 		if errors.Is(err, os.ErrDeadlineExceeded) {
 			fmt.Println(err)
@@ -51,6 +63,7 @@ func main() {
 		}
 
 		_, err = c.WriteTo(buf, addr)
+		_, err = c2.WriteTo(buf2, addr2)
 
 		if errors.Is(err, os.ErrDeadlineExceeded) {
 			fmt.Println(err)
@@ -62,6 +75,7 @@ func main() {
 		time.Sleep(1000000000)
 		fmt.Println("Read/Write SUCCESS")
 		fmt.Println(addr, buf[:size])
+		fmt.Println(addr2, buf2[:size2])
 	}
 
 	// fmt.Println(addr, p)
