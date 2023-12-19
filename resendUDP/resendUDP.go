@@ -43,7 +43,7 @@ func main() {
 		c.SetDeadline(time.Now().Add(time.Duration(4000000000)))
 		buf := make([]byte, 2048)
 
-		_, addr, err := c.ReadFrom(buf)
+		size, addr, err := c.ReadFrom(buf)
 
 		if errors.Is(err, os.ErrDeadlineExceeded) {
 			fmt.Println(err)
@@ -61,7 +61,7 @@ func main() {
 
 		time.Sleep(1000000000)
 		fmt.Println("Read/Write SUCCESS")
-		fmt.Println(addr, buf)
+		fmt.Println(addr, buf[:size])
 	}
 
 	// fmt.Println(addr, p)
