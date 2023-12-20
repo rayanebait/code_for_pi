@@ -61,6 +61,7 @@ func main() {
 			fmt.Println(err)
 			continue
 		}
+		time.Sleep(1000000000)
 
 		_, err = c.WriteTo(buf, addr)
 		_, err = c2.WriteTo(buf2, addr2)
