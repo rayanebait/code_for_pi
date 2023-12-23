@@ -61,7 +61,6 @@ func main() {
 			fmt.Println(err)
 			continue
 		}
-		time.Sleep(1000000000)
 
 		_, err = c.WriteTo(buf, addr)
 		_, err = c2.WriteTo(buf2, addr2)
@@ -73,7 +72,6 @@ func main() {
 
 		// fmt.Println(buf2)
 
-		time.Sleep(1000000000)
 		fmt.Println("Read/Write SUCCESS")
 		fmt.Println(addr, buf[:size])
 		fmt.Println(addr2, buf2[:size2])
