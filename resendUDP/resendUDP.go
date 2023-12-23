@@ -6,7 +6,6 @@ import (
 	"log"
 	"net"
 	"os"
-	"time"
 )
 
 // type PacketUDP struct {
@@ -44,8 +43,8 @@ func main() {
 	// }
 
 	for {
-		c.SetDeadline(time.Now().Add(time.Duration(4000000000)))
-		c2.SetDeadline(time.Now().Add(time.Duration(4000000000)))
+		// c.SetDeadline(time.Now().Add(time.Duration(4000000000)))
+		// c2.SetDeadline(time.Now().Add(time.Duration(4000000000)))
 
 		buf := make([]byte, 2048)
 		buf2 := make([]byte, 2048)
