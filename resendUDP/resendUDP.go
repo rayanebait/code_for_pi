@@ -61,8 +61,8 @@ func main() {
 			continue
 		}
 
-		_, err = c.WriteTo(buf, addr)
-		_, err = c2.WriteTo(buf2, addr2)
+		_, err = c.WriteTo(buf[0:size], addr)
+		_, err = c2.WriteTo(buf2[0:size2], addr2)
 
 		if errors.Is(err, os.ErrDeadlineExceeded) {
 			fmt.Println(err)
